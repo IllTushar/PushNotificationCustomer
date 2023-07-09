@@ -45,7 +45,7 @@ FirebaseAuth mAuth;
         SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,Registration.class));
+              startActivity(new Intent(MainActivity.this,Registration.class));
             }
         });
         Login.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +58,7 @@ FirebaseAuth mAuth;
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             Toast.makeText(MainActivity.this, "You are Login", Toast.LENGTH_SHORT).show();
-                            fcmToken();
+                          //  fcmToken();
                         } else {
                          //   dialog.dismiss();
                             // If sign in fails, display a message to the user.
@@ -70,32 +70,32 @@ FirebaseAuth mAuth;
             }
         });
     }
-    private void fcmToken()
-    {
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w("Error", "Fetching FCM registration token failed", task.getException());
-                            return;
-                        }
-
-                        // Get new FCM registration token
-                        String token = task.getResult();
-
-                        // Log and toast
-                        String msg = getString(Integer.parseInt("This is one"), token);
-                        Log.d("Error", msg);
-                        saveData(token);
-                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    public void saveData(String Token){
-        Model model = new Model(Token);
-
-        reference.child(mAuth.getCurrentUser().getUid()).setValue(model);
-    }
+//    private void fcmToken()
+//    {
+//        FirebaseMessaging.getInstance().getToken()
+//                .addOnCompleteListener(new OnCompleteListener<String>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<String> task) {
+//                        if (!task.isSuccessful()) {
+//                            Log.w("Error", "Fetching FCM registration token failed", task.getException());
+//                            return;
+//                        }
+//
+//                        // Get new FCM registration token
+//                        String token = task.getResult();
+//
+//                        // Log and toast
+//                        String msg = getString(Integer.parseInt("This is one"), token);
+//                        Log.d("Error", msg);
+//                        saveData(token);
+//                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//    }
+//
+//    public void saveData(String Token){
+//        Model model = new Model(Token);
+//
+//        reference.child(mAuth.getCurrentUser().getUid()).setValue(model);
+//    }
 }

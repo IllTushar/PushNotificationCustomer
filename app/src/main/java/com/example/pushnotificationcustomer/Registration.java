@@ -40,21 +40,22 @@ DatabaseReference reference;
         registration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fcmToken();
                 String Email = email.getText().toString().trim();
                 String Password = password.getText().toString().trim();
-            mAuth.createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()){
-
-                        Toast.makeText(Registration.this, "Done", Toast.LENGTH_SHORT).show();
-                        fcmToken();
-                    }
-                    else{
-                        Toast.makeText(Registration.this, "Failed", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+//            mAuth.createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                @Override
+//                public void onComplete(@NonNull Task<AuthResult> task) {
+//                    if (task.isSuccessful()){
+//
+//                        Toast.makeText(Registration.this, "Done", Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                    else{
+//                        Toast.makeText(Registration.this, "Failed", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
             }
         });
 
@@ -76,6 +77,6 @@ DatabaseReference reference;
 
     public void saveData(String Token){
         Model model = new Model(Token);
-        reference.child(mAuth.getCurrentUser().getUid()).setValue(model);
+        reference.child(password.getText().toString()).setValue(model);
     }
 }
